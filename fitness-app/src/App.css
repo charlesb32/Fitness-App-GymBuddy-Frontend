@@ -27,5 +27,52 @@
   align-items: center; /* Vertically center the logo and text */
 }
 
-.button_container {
+.create_plan {
+  text-align: center;
+  padding: 20px;
+}
+
+.create_plan h1 {
+  font-size: 24px; /* Adjust the heading font size */
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+label {
+  width: 100px; /* Adjust the width as needed */
+  text-align: right;
+  margin-right: 15px;
+}
+
+/* Style the Typography component */
+.MuiTypography-root {
+  font-weight: bold;
+  font-size: 16px; /* Adjust the font size */
+}
+
+/* Increase the width of the select input */
+.MuiSelect-select.MuiSelect-select {
+  width: 150px; /* Adjust the width as needed */
+}
+
+input {
+  flex-grow: 1;
+  padding: 5px;
+}
+
+button {
+  margin-top: 15px;
+}
+
+.plan_buttons {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  justify-content: center;
 }

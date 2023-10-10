@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+}
+#logo_img {
+  height: 40px;
+  width: 80px;
+  border-radius: 100%;
+  margin-right: 20px;
+}
+
+.top_bar {
+  outline-style: solid;
+  outline-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  justify-content: space-between; /* This will align items to the start and end of the container */
+  align-items: center; /* This will vertically center items */
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 15px;
+  position: relative;
+}
+
+.left_side {
+  display: flex; /* Create a flex container for GymBuddy and the logo */
+  align-items: center; /* Vertically center the logo and text */
+}
+
+.button_container {
+}

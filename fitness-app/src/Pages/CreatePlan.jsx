@@ -12,6 +12,7 @@ import {
   // OutlinedInput,
   Typography,
 } from "@mui/material";
+import { addWorkoutToUser } from "../Axios/APICalls";
 
 const CreatePlan = () => {
   const [formData, setFormData] = useState({
@@ -36,6 +37,7 @@ const CreatePlan = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission, e.g., send data to an API or perform other actions.
+    addWorkoutToUser(formData);
     console.log(formData);
   };
 

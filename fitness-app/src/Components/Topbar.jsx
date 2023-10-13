@@ -8,7 +8,7 @@ const Topbar = () => {
   return (
     <div className="top_bar">
       <div className="left_side">
-        <img id="logo_img" src={Logo} alt="App Logo" />
+        <img id="topbar_logo_img" src={Logo} alt="App Logo" />
         <h3>GymBuddy</h3>
       </div>
       <div className="button_container">

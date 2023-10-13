@@ -1,9 +1,16 @@
 .App {
   text-align: center;
 }
-#logo_img {
+#topbar_logo_img {
   height: 40px;
   width: 80px;
+  border-radius: 100%;
+  margin-right: 20px;
+}
+
+#login_logo_img {
+  height: 300px;
+  width: 320px;
   border-radius: 100%;
   margin-right: 20px;
 }
@@ -75,4 +82,13 @@ button {
   align-items: center;
   margin-bottom: 15px;
   justify-content: center;
+}
+
+.login {
+  text-align: center;
+  padding: 20px;
+}
+
+.signup_login_field {
+  width: 300px;
 }

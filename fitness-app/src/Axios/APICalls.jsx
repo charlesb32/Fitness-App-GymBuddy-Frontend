@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setAuthToken } from "./setAuthToken";
 
 const baseURL = "http://localhost:4000/";
 const instance = axios.create({ baseURL });
@@ -27,15 +28,30 @@ export const addUser = async (userData) => {
 
 export const login = async (loginPayload) => {
   try {
-    console.log("HI");
     const response = await instance.post("/login", loginPayload);
-    console.log("HERE");
-    console.log(response);
+    console.log(response.data);
     const { token } = response.data;
+    localStorage.setItem("token", token);
+    //set token to axios common header
+    setAuthToken(token);
+    const user = await getUser(token);
+    console.log(user);
     console.log(token);
     return response.data;
   } catch (error) {
     console.log(error);
     throw error;
+  }
+};
+
+export const getUser = async (token) => {
+  const headers = {
+    "x-access-token": token,
+  };
+  try {
+    const user = await instance.get("/getUser", { headers });
+    return user;
+  } catch (err) {
+    throw err;
   }
 };

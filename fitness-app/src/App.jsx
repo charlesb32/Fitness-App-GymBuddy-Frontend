@@ -7,8 +7,31 @@ import SignUp from "./Pages/SignUp";
 
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { setAuthToken } from "./Axios/setAuthToken";
+import { getUser } from "./Axios/APICalls";
+import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currUser, setCurrUser] = useState({});
+
+  // Check jwt token on app startup
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAuthToken(token);
+      setIsAuthenticated(true);
+      getUser(token).then((res) => {
+        console.log(res.data);
+        setCurrUser(res.data);
+      });
+      console.log(isAuthenticated);
+    } else {
+      console.log(isAuthenticated);
+      setIsAuthenticated(false);
+    }
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
@@ -17,9 +40,18 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          {/* <Route
+            path="/home"
+            element={
+              <PrivateRoute
+                element={<Home />}
+                isAuthenticated={isAuthenticated}
+              />
+            }
+          /> */}
           <Route path="/home" element={<Home />} />
           <Route path="/plans" element={<Plans />} />
-          <Route path="/createPlan" element={<CreatePlan />} />
+          <Route path="/createPlan" element={<CreatePlan user={currUser} />} />
         </Routes>
       </BrowserRouter>
     </div>

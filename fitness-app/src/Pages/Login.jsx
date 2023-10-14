@@ -33,57 +33,57 @@ const Login = () => {
 
   const handleLogin = () => {
     login(formData);
-    // const loginPayload = {
-    //   email: formData.email,
-    //   password: formData.password,
-    // };
+    navigate("/home");
+    // navigate("/login");
   };
   return (
     <div className="login">
-      <img id="login_logo_img" src={Logo} alt="App Logo" />
-      <h3>GymBuddy</h3>
-      <div className="form-group">
-        <TextField
-          className="signup_login_field"
-          placeholder="email"
-          required
-          type="email"
-          id="email"
-          onChange={handleChange}
-          name="email"
-          value={formData.email}
-        />
-      </div>
-      <div className="form-group">
-        <TextField
-          className="signup_login_field"
-          placeholder="password"
-          required
-          id="password"
-          onChange={handleChange}
-          name="password"
-          value={formData.password}
-          type="password"
-        />
-      </div>
-      <div className="form_group">
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ marginRight: "10px" }}
-          onClick={handleLogin}
-        >
-          Login
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ marginLeft: "10px" }}
-          onClick={() => navigate("/signup")}
-        >
-          Sign Up
-        </Button>
-      </div>
+      <form onSubmit={handleLogin}>
+        <img id="login_logo_img" src={Logo} alt="App Logo" />
+        <h3>GymBuddy</h3>
+        <div className="form-group">
+          <TextField
+            className="signup_login_field"
+            placeholder="email"
+            required
+            type="email"
+            id="email"
+            onChange={handleChange}
+            name="email"
+            value={formData.email}
+          />
+        </div>
+        <div className="form-group">
+          <TextField
+            className="signup_login_field"
+            placeholder="password"
+            required
+            id="password"
+            onChange={handleChange}
+            name="password"
+            value={formData.password}
+            type="password"
+          />
+        </div>
+        <div className="form_group">
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginRight: "10px" }}
+            type="submit"
+          >
+            Login
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginLeft: "10px" }}
+            onClick={() => navigate("/signup")}
+          >
+            Sign Up
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };

@@ -17,12 +17,13 @@ export const addWorkoutToUser = async (userData) => {
 
 export const addUser = async (userData) => {
   try {
-    // Make a PUT request to your server's route for assigning a workout
     const response = await instance.post("/addUser", { userData });
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
-    throw error;
+    // console.log(error.response.data.message);
+    alert(error.response.data.message);
+    return error;
   }
 };
 
@@ -35,12 +36,16 @@ export const login = async (loginPayload) => {
     //set token to axios common header
     setAuthToken(token);
     const user = await getUser(token);
-    console.log(user);
-    console.log(token);
+    console.log(user.data);
+    // console.log(token);
     return response.data;
   } catch (error) {
     console.log(error);
-    throw error;
+    alert(error.response.data.message);
+
+    // throw error;
+
+    return error;
   }
 };
 

@@ -1,5 +1,5 @@
 // import * as React from "react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextField,
   Button,
@@ -14,7 +14,10 @@ import {
 } from "@mui/material";
 import { addWorkoutToUser } from "../Axios/APICalls";
 
-const CreatePlan = () => {
+const CreatePlan = (currUser) => {
+  useEffect(() => {
+    console.log(currUser);
+  }, []);
   const [formData, setFormData] = useState({
     age: "",
     gender: "",

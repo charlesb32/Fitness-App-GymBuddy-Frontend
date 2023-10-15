@@ -63,3 +63,12 @@ export const getUser = async (token) => {
     throw err;
   }
 };
+
+export const getPlans = async (currUserId) => {
+  try {
+    const plans = await instance.get(`/getPlans/${currUserId}`);
+    return plans;
+  } catch (err) {
+    throw err;
+  }
+};

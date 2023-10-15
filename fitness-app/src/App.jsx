@@ -23,15 +23,16 @@ function App() {
       setAuthToken(token);
       setIsAuthenticated(true);
       getUser(token).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setCurrUser(res.data);
       });
-      console.log(isAuthenticated);
+      // console.log(isAuthenticated);
     } else {
       console.log(isAuthenticated);
       setIsAuthenticated(false);
     }
   }, []);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -49,8 +50,8 @@ function App() {
               />
             }
           /> */}
-          <Route path="/home" element={<Home />} />
-          <Route path="/plans" element={<Plans />} />
+          <Route path="/home" element={<Home user={currUser} />} />
+          <Route path="/plans" element={<Plans user={currUser} />} />
           <Route path="/createPlan" element={<CreatePlan user={currUser} />} />
         </Routes>
       </BrowserRouter>

@@ -4,10 +4,13 @@ import { setAuthToken } from "./setAuthToken";
 const baseURL = "http://localhost:4000/";
 const instance = axios.create({ baseURL });
 
-export const addWorkoutToUser = async (userData) => {
+export const addPlanToUser = async (userData, currUserId) => {
   try {
-    // Make a PUT request to your server's route for assigning a workout
-    const response = await instance.put("/addWorkoutToUser", { userData });
+    // Make a PUT request to your server's route for assigning a plan
+    const response = await instance.put("/addPlanToUser", {
+      userData,
+      currUserId,
+    });
     return response.data;
   } catch (error) {
     console.log("ERROR");

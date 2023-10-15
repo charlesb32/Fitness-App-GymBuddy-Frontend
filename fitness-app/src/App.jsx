@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { setAuthToken } from "./Axios/setAuthToken";
 import { getUser } from "./Axios/APICalls";
-import PrivateRoute from "./Components/PrivateRoute";
+import RouteGuard from "./Components/RouteGuard";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

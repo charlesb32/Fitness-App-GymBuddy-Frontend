@@ -12,7 +12,7 @@ import {
   // OutlinedInput,
   Typography,
 } from "@mui/material";
-import { addWorkoutToUser } from "../Axios/APICalls";
+import { addPlanToUser } from "../Axios/APICalls";
 
 const CreatePlan = (currUser) => {
   useEffect(() => {
@@ -40,7 +40,7 @@ const CreatePlan = (currUser) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission, e.g., send data to an API or perform other actions.
-    addWorkoutToUser(formData);
+    addPlanToUser(formData, currUser.user.user.id);
     console.log(formData);
   };
 

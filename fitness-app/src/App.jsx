@@ -15,8 +15,9 @@ import RouteGuard from "./Components/RouteGuard";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currUser, setCurrUser] = useState({});
-
+  const [plans, setPlans] = useState(5);
   // Check jwt token on app startup
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {

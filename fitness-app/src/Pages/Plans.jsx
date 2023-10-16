@@ -11,6 +11,8 @@ const Plans = (currUser) => {
   const [selectedPlan, setSelectedPlan] = useState(0);
   // Fetch data when the component mounts
   useEffect(() => {
+    console.log(currUser);
+    // console.log(plans);
     // Fetch data when currUser is updated
     const fetchData = async () => {
       if (currUser && currUser.user) {

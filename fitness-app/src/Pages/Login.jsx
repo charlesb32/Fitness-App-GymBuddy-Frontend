@@ -34,7 +34,7 @@ const Login = () => {
   const handleLogin = () => {
     login(formData);
     navigate("/home");
-    window.location.reload();
+    // window.location.reload();
     // navigate("/login");
   };
   return (

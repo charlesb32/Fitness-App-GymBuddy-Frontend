@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 
 const ViewPlan = ({ data, selectedPlan }) => {
   const currPlan = data[selectedPlan];
+  // console.log(currPlan);
   const workouts = currPlan.workoutId.workouts;
   const daysOfWeek = [
     "Sunday",

@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Checkbox } from "@mui/material";
 const MyPlans = ({ data, selectedPlan, setSelectedPlan }) => {
-  console.log(data);
+  // console.log(data);
   const dataArr = data;
   //   console.log(dataArr);
   //   const rows = data.data.map((d) => {

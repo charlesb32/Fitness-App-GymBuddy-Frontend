@@ -10,7 +10,7 @@ const HomeWorkoutTable = ({ data, selectedPlan }) => {
   const today = new Date();
   const dayOfWeek = today.getDay(); // Returns 0 for Sunday, 1 for Monday, 2 for Tuesday, etc.
   const todaysWorkout = data[selectedPlan].workoutId.workouts[dayOfWeek];
-  //   console.log(todaysWorkout);
+  console.log(todaysWorkout);
   return (
     <div>
       <TableContainer component={Paper}>
@@ -23,23 +23,30 @@ const HomeWorkoutTable = ({ data, selectedPlan }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {todaysWorkout.map((exercise, index) => {
-              // Extract sets, reps, and exercise using regular expressions
-              const regexResult = exercise.match(/(\d+)x(\d+)\s(.+)/);
+            {todaysWorkout.length > 0 ? (
+              todaysWorkout.map((exercise, index) => {
+                const regexResult = exercise.match(/(\d+)x(\d+)\s(.+)/);
 
-              if (regexResult) {
-                const [, sets, reps, exerciseName] = regexResult;
-                return (
-                  <TableRow key={`${exerciseName}-${index}`}>
-                    <TableCell>{exerciseName}</TableCell>
-                    <TableCell>{sets}</TableCell>
-                    <TableCell>{reps}</TableCell>
-                  </TableRow>
-                );
-              } else {
-                return null; // Handle invalid data format
-              }
-            })}
+                if (regexResult) {
+                  const [, sets, reps, exerciseName] = regexResult;
+                  return (
+                    <TableRow key={`${exerciseName}-${index}`}>
+                      <TableCell>{exerciseName}</TableCell>
+                      <TableCell>{sets}</TableCell>
+                      <TableCell>{reps}</TableCell>
+                    </TableRow>
+                  );
+                } else {
+                  return null; // Handle invalid data format
+                }
+              })
+            ) : (
+              <TableRow>
+                <TableCell>Rest</TableCell>
+                <TableCell>Rest</TableCell>
+                <TableCell>Rest</TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

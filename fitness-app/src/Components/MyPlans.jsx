@@ -7,9 +7,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Checkbox } from "@mui/material";
+import { setActivePlanIndex } from "../Axios/APICalls";
+import { useSelector } from "react-redux";
+
 const MyPlans = ({ data, selectedPlan, setSelectedPlan }) => {
   // console.log(data);
   const dataArr = data;
+  const currUser = useSelector((state) => state.user.userInfo);
   //   console.log(dataArr);
   //   const rows = data.data.map((d) => {
   //     return d.goal, d.dailyCalories, d.dailyCarbs, d.dailyFats, d.dailyProtein;
@@ -25,8 +29,9 @@ const MyPlans = ({ data, selectedPlan, setSelectedPlan }) => {
   }));
 
   const handleActivePlanChange = (planIndex) => {
-    console.log(planIndex);
+    console.log(typeof planIndex);
     setSelectedPlan(planIndex);
+    setActivePlanIndex(currUser.user.id, planIndex);
   };
   //   console.log(rows);
   return (

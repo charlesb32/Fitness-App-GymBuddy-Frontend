@@ -4,20 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { getPlans } from "../Axios/APICalls";
 import MyPlans from "../Components/MyPlans";
 import ViewPlan from "../Components/ViewPlan";
-
-const Plans = (currUser) => {
+import { useSelector } from "react-redux";
+const Plans = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(0);
+  const currUser = useSelector((state) => state.user.userInfo);
+  console.log(currUser);
   // Fetch data when the component mounts
+
   useEffect(() => {
-    console.log(currUser);
-    // console.log(plans);
-    // Fetch data when currUser is updated
     const fetchData = async () => {
       if (currUser && currUser.user) {
         try {
-          const plans = await getPlans(currUser.user.user.id);
+          const plans = await getPlans(currUser.user.id);
           setData(plans.data);
         } catch (error) {
           // Handle errors if needed

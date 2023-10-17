@@ -2,12 +2,15 @@ import { Button } from "@mui/material";
 import * as React from "react";
 import Logo from "../Assets/Logo.jpg";
 import { useNavigate } from "react-router-dom";
-
+import { logout } from "../Redux/userActions";
+import { useDispatch } from "react-redux";
 const Topbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // const setIsLoggedIn = props.setIsLoggedIn;
   const handleLogout = () => {
     localStorage.removeItem("token");
+    dispatch(logout()); // Dispatch the logout action to clear user-related state
     navigate("/login");
     // setIsLoggedIn(false);
   };

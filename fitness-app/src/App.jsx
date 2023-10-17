@@ -11,11 +11,15 @@ import React, { useState, useEffect } from "react";
 import { setAuthToken } from "./Axios/setAuthToken";
 import { getUser } from "./Axios/APICalls";
 import RouteGuard from "./Components/RouteGuard";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "./Redux/userActions";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currUser, setCurrUser] = useState({});
   const [plans, setPlans] = useState(5);
+
+  const dispatch = useDispatch();
   // Check jwt token on app startup
 
   useEffect(() => {
@@ -26,6 +30,7 @@ function App() {
       getUser(token).then((res) => {
         // console.log(res.data);
         setCurrUser(res.data);
+        dispatch(setUserInfo(res.data));
       });
       // console.log(isAuthenticated);
     } else {
@@ -51,9 +56,9 @@ function App() {
               />
             }
           /> */}
-          <Route path="/home" element={<Home user={currUser} />} />
-          <Route path="/plans" element={<Plans user={currUser} />} />
-          <Route path="/createPlan" element={<CreatePlan user={currUser} />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/plans" element={<Plans />} />
+          <Route path="/createPlan" element={<CreatePlan />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -72,3 +72,24 @@ export const getPlans = async (currUserId) => {
     throw err;
   }
 };
+
+export const setActivePlanIndex = async (currUserId, index) => {
+  try {
+    const ind = await instance.put(`/setActivePlanIndex`, {
+      currUserId,
+      index,
+    });
+    return ind;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getActivePlanIndex = async (currUserId) => {
+  try {
+    const ind = await instance.get(`/getActivePlanIndex/${currUserId}`);
+    return ind;
+  } catch (err) {
+    throw err;
+  }
+};

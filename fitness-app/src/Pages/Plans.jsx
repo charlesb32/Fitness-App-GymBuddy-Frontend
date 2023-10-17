@@ -1,16 +1,17 @@
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getPlans } from "../Axios/APICalls";
+import { getPlans, getUserInfo } from "../Axios/APICalls";
 import MyPlans from "../Components/MyPlans";
 import ViewPlan from "../Components/ViewPlan";
 import { useSelector } from "react-redux";
+
 const Plans = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(0);
   const currUser = useSelector((state) => state.user.userInfo);
-  console.log(currUser);
+  // console.log(currUser);
   // Fetch data when the component mounts
 
   useEffect(() => {
@@ -19,6 +20,10 @@ const Plans = () => {
         try {
           const plans = await getPlans(currUser.user.id);
           setData(plans.data);
+          const activePlanIndex = (await getUserInfo(currUser.user.id)).data
+            .activePlanIndex;
+
+          setSelectedPlan(activePlanIndex);
         } catch (error) {
           // Handle errors if needed
           console.error("Error fetching plans:", error);

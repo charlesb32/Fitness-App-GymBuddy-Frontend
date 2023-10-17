@@ -50,7 +50,7 @@ const MyPlans = ({ data, selectedPlan, setSelectedPlan }) => {
         <TableBody>
           {rows.map((row, index) => (
             <TableRow
-              key={row.plans}
+              key={`${row.plans} ${index}`}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               {/* <TableCell component="th" scope="row">

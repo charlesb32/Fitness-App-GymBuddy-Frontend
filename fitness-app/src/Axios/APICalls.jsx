@@ -85,9 +85,9 @@ export const setActivePlanIndex = async (currUserId, index) => {
   }
 };
 
-export const getActivePlanIndex = async (currUserId) => {
+export const getUserInfo = async (currUserId) => {
   try {
-    const ind = await instance.get(`/getActivePlanIndex/${currUserId}`);
+    const ind = await instance.get(`/getUserInfo/${currUserId}`);
     return ind;
   } catch (err) {
     throw err;

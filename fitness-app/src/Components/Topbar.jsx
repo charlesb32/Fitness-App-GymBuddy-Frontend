@@ -4,9 +4,12 @@ import Logo from "../Assets/Logo.jpg";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../Redux/userActions";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
 const Topbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const currUser = useSelector((state) => state.user.userInfo);
   // const setIsLoggedIn = props.setIsLoggedIn;
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -18,8 +21,8 @@ const Topbar = () => {
     <div className="top_bar">
       <div className="left_side">
         <img id="topbar_logo_img" src={Logo} alt="App Logo" />
-        <h3>GymBuddy</h3>
-        <h3>Welcome {}</h3>
+        <h3 style={{ paddingRight: "400px" }}>GymBuddy</h3>
+        <h3>Welcome {currUser ? currUser.user.firstname : ""}</h3>
       </div>
       <div className="button_container">
         <Button variant="outlined" onClick={() => navigate("/home")}>

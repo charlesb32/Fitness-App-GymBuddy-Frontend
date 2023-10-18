@@ -16,8 +16,9 @@ import { setUserInfo } from "./Redux/userActions";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currUser, setCurrUser] = useState({});
-  const [plans, setPlans] = useState(5);
+  // const [currUser, setCurrUser] = useState({});
+  // const [plans, setPlans] = useState(5);
+  // const [dataLoaded, setDataLoaded] = useState(false);
 
   const dispatch = useDispatch();
   // Check jwt token on app startup
@@ -29,8 +30,9 @@ function App() {
       setIsAuthenticated(true);
       getUser(token).then((res) => {
         // console.log(res.data);
-        setCurrUser(res.data);
+        // setCurrUser(res.data);
         dispatch(setUserInfo(res.data));
+        // setDataLoaded(true);
       });
       // console.log(isAuthenticated);
     } else {
@@ -44,18 +46,9 @@ function App() {
       <BrowserRouter>
         <Topbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          {/* <Route
-            path="/home"
-            element={
-              <PrivateRoute
-                element={<Home />}
-                isAuthenticated={isAuthenticated}
-              />
-            }
-          /> */}
           <Route path="/home" element={<Home />} />
           <Route path="/plans" element={<Plans />} />
           <Route path="/createPlan" element={<CreatePlan />} />

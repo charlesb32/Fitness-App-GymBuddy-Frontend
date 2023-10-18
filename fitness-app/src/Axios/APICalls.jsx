@@ -38,10 +38,11 @@ export const login = async (loginPayload) => {
     localStorage.setItem("token", token);
     //set token to axios common header
     setAuthToken(token);
-    const user = await getUser(token);
-    console.log(user.data);
+    // const user = await getUser(token);
+    // console.log(user.data);
     // console.log(token);
     return response.data;
+    // return { token, user: user.data };
   } catch (error) {
     console.log(error);
     alert(error.response.data.message);

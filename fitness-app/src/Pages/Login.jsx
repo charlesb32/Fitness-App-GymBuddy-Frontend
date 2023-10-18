@@ -14,9 +14,14 @@ import {
 import Logo from "../Assets/Logo.jpg";
 import { Navigate, useNavigate } from "react-router-dom";
 import { login } from "../Axios/APICalls";
+import { setAuthToken } from "../Axios/setAuthToken";
+import { getUser } from "../Axios/APICalls";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../Redux/userActions";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,12 +36,42 @@ const Login = () => {
     }));
   };
 
-  const handleLogin = () => {
-    login(formData);
+  const handleLogin = async () => {
+    console.log(formData);
+    // const loginResponse = await login(formData);
+    login(formData).then((res) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        setAuthToken(token);
+        // setIsAuthenticated(true);
+        getUser(token).then((res) => {
+          // console.log(res.data);
+          // setCurrUser(res.data);
+          dispatch(setUserInfo(res.data));
+          // setDataLoaded(true);
+        });
+        // console.log(isAuthenticated);
+      } else {
+        console.log("Not Authed");
+        // setIsAuthenticated(false);
+      }
+    });
+    // console.log(loginResponse);
     navigate("/home");
     // window.location.reload();
     // navigate("/login");
   };
+  // const handleLogin = async () => {
+  //   try {
+  //     console.log(formData);
+  //     await login(formData); // Wait for the login process to complete
+  //     // navigate("/home"); // Navigate to the home page upon successful login
+  //   } catch (error) {
+  //     console.error("Login failed:", error);
+  //     // Handle the login failure, such as displaying an error message to the user.
+  //   }
+  // };
+
   return (
     <div className="login">
       <form onSubmit={handleLogin}>

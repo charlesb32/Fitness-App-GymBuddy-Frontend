@@ -11,8 +11,15 @@ const Home = () => {
   const [selectedPlan, setSelectedPlan] = useState(0);
   const currUser = useSelector((state) => state.user.userInfo);
   // console.log(currUser);
+
+  // useEffect(() => {
+  //   window.location.reload();
+  // }, []);
   useEffect(() => {
+    // window.location.reload();
     const fetchData = async () => {
+      console.log("Here");
+      // window.location.reload();
       if (currUser && currUser.user) {
         try {
           const plans = await getPlans(currUser.user.id);

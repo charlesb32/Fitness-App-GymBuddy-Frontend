@@ -15,31 +15,27 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "./Redux/userActions";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const [currUser, setCurrUser] = useState({});
-  // const [plans, setPlans] = useState(5);
-  // const [dataLoaded, setDataLoaded] = useState(false);
-
-  const dispatch = useDispatch();
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const dispatch = useDispatch();
   // Check jwt token on app startup
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setAuthToken(token);
-      setIsAuthenticated(true);
-      getUser(token).then((res) => {
-        // console.log(res.data);
-        // setCurrUser(res.data);
-        dispatch(setUserInfo(res.data));
-        // setDataLoaded(true);
-      });
-      // console.log(isAuthenticated);
-    } else {
-      console.log(isAuthenticated);
-      setIsAuthenticated(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     setAuthToken(token);
+  //     setIsAuthenticated(true);
+  //     getUser(token).then((res) => {
+  //       // console.log(res.data);
+  //       // setCurrUser(res.data);
+  //       dispatch(setUserInfo(res.data));
+  //       // setDataLoaded(true);
+  //     });
+  //     // console.log(isAuthenticated);
+  //   } else {
+  //     console.log(isAuthenticated);
+  //     setIsAuthenticated(false);
+  //   }
+  // }, []);
 
   return (
     <div className="App">

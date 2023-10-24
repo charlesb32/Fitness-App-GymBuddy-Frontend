@@ -12,9 +12,9 @@ const Home = () => {
   const currUser = useSelector((state) => state.user.userInfo);
   // console.log(currUser);
 
-  // useEffect(() => {
-  //   window.location.reload();
-  // }, []);
+  useEffect(() => {
+    console.log(currUser);
+  }, []);
   useEffect(() => {
     // window.location.reload();
     const fetchData = async () => {

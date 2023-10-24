@@ -46,7 +46,7 @@ const CreatePlan = () => {
     e.preventDefault();
     // Handle form submission, e.g., send data to an API or perform other actions.
     addPlanToUser(formData, currUser.user.id);
-    navigate("/plans");
+    // navigate("/plans");
     console.log(formData);
     // window.location.reload();
   };

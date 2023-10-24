@@ -52,6 +52,7 @@ const Login = () => {
         });
         // console.log(isAuthenticated);
       } else {
+        navigate("/login");
         console.log("Not Authed");
         // setIsAuthenticated(false);
       }

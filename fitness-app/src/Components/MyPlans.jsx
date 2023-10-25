@@ -10,6 +10,7 @@ import { Checkbox } from "@mui/material";
 import { setActivePlanIndex } from "../Axios/APICalls";
 import { useSelector } from "react-redux";
 
+//shows all plans that a user account has, with daily calorires, carb, fat, and protein intake, as well as their plan type. From here, the user can also select which plan they want to be their active plan
 const MyPlans = ({ data, selectedPlan, setSelectedPlan }) => {
   const dataArr = data;
   const currUser = useSelector((state) => state.user.userInfo);

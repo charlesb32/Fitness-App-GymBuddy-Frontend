@@ -4,6 +4,7 @@ import { addPlanToUser } from "../Axios/APICalls";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+//Create plan form for when a user wants to create a new plan
 const CreatePlan = () => {
   const navigate = useNavigate();
   const currUser = useSelector((state) => state.user.userInfo);

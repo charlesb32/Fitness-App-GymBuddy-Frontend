@@ -4,6 +4,7 @@ import { setAuthToken } from "./setAuthToken";
 const baseURL = "http://localhost:4000/";
 const instance = axios.create({ baseURL });
 
+//given the currUserId and the userData from the create plan form, will create a specific plan for that user
 export const addPlanToUser = async (userData, currUserId) => {
   try {
     const response = await instance.put("/addPlanToUser", {
@@ -17,6 +18,7 @@ export const addPlanToUser = async (userData, currUserId) => {
   }
 };
 
+//creates a new user using userData
 export const addUser = async (userData) => {
   try {
     const response = await instance.post("/addUser", { userData });
@@ -28,6 +30,7 @@ export const addUser = async (userData) => {
   }
 };
 
+//logs user in
 export const login = async (loginPayload) => {
   try {
     const response = await instance.post("/login", loginPayload);
@@ -44,6 +47,7 @@ export const login = async (loginPayload) => {
   }
 };
 
+//gets the user info based on the token
 export const getUser = async (token) => {
   const headers = {
     "x-access-token": token,
@@ -56,6 +60,7 @@ export const getUser = async (token) => {
   }
 };
 
+//gets all plans for a currUser by userID
 export const getPlans = async (currUserId) => {
   try {
     const plans = await instance.get(`/getPlans/${currUserId}`);
@@ -65,6 +70,7 @@ export const getPlans = async (currUserId) => {
   }
 };
 
+//sets the acticePlanIndex for a user based on their id and the index of the plan they selected
 export const setActivePlanIndex = async (currUserId, index) => {
   try {
     const ind = await instance.put(`/setActivePlanIndex`, {
@@ -77,6 +83,7 @@ export const setActivePlanIndex = async (currUserId, index) => {
   }
 };
 
+//gets userInfo based on userID
 export const getUserInfo = async (currUserId) => {
   try {
     const ind = await instance.get(`/getUserInfo/${currUserId}`);

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import HomeMacroTable from "../Components/HomeMacroTable";
 import HomeWorkoutTable from "../Components/HomeWorkoutTable";
 
+//home page that users land on when they login
 const Home = () => {
   const [data, setData] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(0);

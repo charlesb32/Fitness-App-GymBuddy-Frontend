@@ -1,5 +1,6 @@
 import { Table, TableBody, TableRow, TableCell } from "@mui/material";
 
+//displays daily calories, carbs, fats, and protein intake
 const HomeMacroTable = ({ data, selectedPlan }) => {
   const currPlan = data[selectedPlan];
   const macroBreakDown = {

@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+//this shows their weekly workout routine based on the user's selected active plan
 const ViewPlan = ({ data, selectedPlan }) => {
   const currPlan = data[selectedPlan];
   const workouts = currPlan.workoutId.workouts;

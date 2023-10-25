@@ -10,7 +10,6 @@ const HomeWorkoutTable = ({ data, selectedPlan }) => {
   const today = new Date();
   const dayOfWeek = today.getDay(); // Returns 0 for Sunday, 1 for Monday, 2 for Tuesday, etc.
   const todaysWorkout = data[selectedPlan].workoutId.workouts[dayOfWeek];
-  //   console.log(todaysWorkout);
   return (
     <div>
       <TableContainer component={Paper}>

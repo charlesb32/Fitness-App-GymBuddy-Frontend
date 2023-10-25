@@ -11,15 +11,12 @@ const Topbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currUser = useSelector((state) => state.user.userInfo);
-  // const setIsLoggedIn = props.setIsLoggedIn;
   const handleLogout = () => {
     localStorage.removeItem("token");
-    // localStorage.removeItem("persist:root");
     const persistor = persistStore(store);
     persistor.purge(); // This will purge the persisted state
     dispatch(logout()); // Dispatch the logout action to clear user-related state
     navigate("/login");
-    // setIsLoggedIn(false);
   };
   return (
     <div className="top_bar">

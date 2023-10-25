@@ -11,14 +11,8 @@ import { setActivePlanIndex } from "../Axios/APICalls";
 import { useSelector } from "react-redux";
 
 const MyPlans = ({ data, selectedPlan, setSelectedPlan }) => {
-  // console.log(data);
   const dataArr = data;
   const currUser = useSelector((state) => state.user.userInfo);
-  //   console.log(dataArr);
-  //   const rows = data.data.map((d) => {
-  //     return d.goal, d.dailyCalories, d.dailyCarbs, d.dailyFats, d.dailyProtein;
-  //   });
-  //   console.log(rows);
   const rows = dataArr.map((plan) => ({
     plans: plan.goal,
     dailyCalories: plan.dailyCalories,
@@ -33,7 +27,7 @@ const MyPlans = ({ data, selectedPlan, setSelectedPlan }) => {
     setSelectedPlan(planIndex);
     setActivePlanIndex(currUser.user.id, planIndex);
   };
-  //   console.log(rows);
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -53,9 +47,6 @@ const MyPlans = ({ data, selectedPlan, setSelectedPlan }) => {
               key={`${row.plans} ${index}`}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              {/* <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell> */}
               <TableCell align="left">{row.plans}</TableCell>
               <TableCell align="right">{row.dailyCalories}</TableCell>
               <TableCell align="right">{row.dailyCarbs}</TableCell>
@@ -72,7 +63,6 @@ const MyPlans = ({ data, selectedPlan, setSelectedPlan }) => {
                   // Handle checkbox click to update the active plan
                   onChange={() => handleActivePlanChange(index)}
                 />
-                {/* {row.active} */}
               </TableCell>
             </TableRow>
           ))}

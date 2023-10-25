@@ -6,7 +6,6 @@ const instance = axios.create({ baseURL });
 
 export const addPlanToUser = async (userData, currUserId) => {
   try {
-    // Make a PUT request to your server's route for assigning a plan
     const response = await instance.put("/addPlanToUser", {
       userData,
       currUserId,
@@ -24,7 +23,6 @@ export const addUser = async (userData) => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    // console.log(error.response.data.message);
     alert(error.response.data.message);
     return error;
   }
@@ -38,17 +36,10 @@ export const login = async (loginPayload) => {
     localStorage.setItem("token", token);
     //set token to axios common header
     setAuthToken(token);
-    // const user = await getUser(token);
-    // console.log(user.data);
-    // console.log(token);
     return response.data;
-    // return { token, user: user.data };
   } catch (error) {
     console.log(error);
     alert(error.response.data.message);
-
-    // throw error;
-
     return error;
   }
 };

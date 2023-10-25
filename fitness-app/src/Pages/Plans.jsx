@@ -11,8 +11,6 @@ const Plans = () => {
   const [data, setData] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(0);
   const currUser = useSelector((state) => state.user.userInfo);
-  // console.log(currUser);
-  // Fetch data when the component mounts
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,12 +23,10 @@ const Plans = () => {
 
           setSelectedPlan(activePlanIndex);
         } catch (error) {
-          // Handle errors if needed
           console.error("Error fetching plans:", error);
         }
       }
     };
-
     fetchData();
   }, [currUser]); // Run the effect whenever currUser changes
 
@@ -56,11 +52,7 @@ const Plans = () => {
       {data.length > 0 && (
         <div className="View_Plan_Table">
           <h1 style={{ textAlign: "left" }}>Workout Schedule</h1>
-          <ViewPlan
-            data={data}
-            selectedPlan={selectedPlan}
-            // style={{ marginTop: "200px" }}
-          />
+          <ViewPlan data={data} selectedPlan={selectedPlan} />
         </div>
       )}
     </div>

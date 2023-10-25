@@ -1,12 +1,6 @@
-import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Table, TableBody, TableRow, TableCell } from "@mui/material";
-import { useSelector } from "react-redux";
+
 const HomeMacroTable = ({ data, selectedPlan }) => {
-  const currUser = useSelector((state) => state.user.userInfo);
-  //   console.log(currUser, data, selectedPlan);
-  //   const selectedPlan = currUser.user.activePlanIndex;
   const currPlan = data[selectedPlan];
   const macroBreakDown = {
     Calories: `${currPlan.dailyCalories} cal`,

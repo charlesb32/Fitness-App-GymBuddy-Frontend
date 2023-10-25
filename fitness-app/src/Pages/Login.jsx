@@ -1,18 +1,7 @@
 import React, { useState } from "react";
-import {
-  TextField,
-  Button,
-  // FormControl,
-  // InputLabel,
-  Select,
-  MenuItem,
-  // SelectChangeEvent,
-  // Box,
-  // OutlinedInput,
-  Typography,
-} from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import Logo from "../Assets/Logo.jpg";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { login } from "../Axios/APICalls";
 import { setAuthToken } from "../Axios/setAuthToken";
 import { getUser } from "../Axios/APICalls";
@@ -29,49 +18,31 @@ const Login = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // console.log(`Name: ${name}, Value: ${value}`);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const handleLogin = async () => {
-    console.log(formData);
-    // const loginResponse = await login(formData);
-    login(formData).then((res) => {
-      const token = localStorage.getItem("token");
-      if (token) {
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    try {
+      const loginResponse = await login(formData); // Await the login response
+
+      if (loginResponse && localStorage.getItem("token")) {
+        const token = localStorage.getItem("token");
         setAuthToken(token);
-        // setIsAuthenticated(true);
-        getUser(token).then((res) => {
-          // console.log(res.data);
-          // setCurrUser(res.data);
-          dispatch(setUserInfo(res.data));
-          // setDataLoaded(true);
-        });
-        // console.log(isAuthenticated);
+        const userResponse = await getUser(token); // Await the user response
+        dispatch(setUserInfo(userResponse.data));
+        navigate("/home"); // Navigate to /home if login is successful
       } else {
-        navigate("/login");
         console.log("Not Authed");
-        // setIsAuthenticated(false);
       }
-    });
-    // console.log(loginResponse);
-    navigate("/home");
-    // window.location.reload();
-    // navigate("/login");
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
   };
-  // const handleLogin = async () => {
-  //   try {
-  //     console.log(formData);
-  //     await login(formData); // Wait for the login process to complete
-  //     // navigate("/home"); // Navigate to the home page upon successful login
-  //   } catch (error) {
-  //     console.error("Login failed:", error);
-  //     // Handle the login failure, such as displaying an error message to the user.
-  //   }
-  // };
 
   return (
     <div className="login">
@@ -115,7 +86,10 @@ const Login = () => {
             variant="contained"
             color="primary"
             style={{ marginLeft: "10px" }}
-            onClick={() => navigate("/signup")}
+            onClick={() => {
+              console.log("HERE");
+              navigate("/signup");
+            }}
           >
             Sign Up
           </Button>

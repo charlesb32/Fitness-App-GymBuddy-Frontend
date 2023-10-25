@@ -1,28 +1,12 @@
-// import * as React from "react";
-import React, { useEffect, useState } from "react";
-import {
-  TextField,
-  Button,
-  // FormControl,
-  // InputLabel,
-  Select,
-  MenuItem,
-  // SelectChangeEvent,
-  // Box,
-  // OutlinedInput,
-  Typography,
-} from "@mui/material";
+import React, { useState } from "react";
+import { TextField, Button, Select, MenuItem, Typography } from "@mui/material";
 import { addPlanToUser } from "../Axios/APICalls";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const CreatePlan = () => {
   const navigate = useNavigate();
   const currUser = useSelector((state) => state.user.userInfo);
-  console.log(currUser);
-  // useEffect(() => {
-  //   console.log(currUser);
-  // }, []);
   const [formData, setFormData] = useState({
     age: "",
     gender: "",
@@ -42,13 +26,13 @@ const CreatePlan = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission, e.g., send data to an API or perform other actions.
-    addPlanToUser(formData, currUser.user.id);
-    // navigate("/plans");
-    console.log(formData);
-    // window.location.reload();
+    addPlanToUser(formData, currUser.user.id).then((res) => {
+      setTimeout(() => {
+        navigate("/plans");
+      }, 100); // waits for 0.1 second before navigating
+    });
   };
 
   const handleClear = () => {
@@ -66,7 +50,6 @@ const CreatePlan = () => {
   return (
     <div className="create_plan">
       <h1>Create Plan</h1>
-      {/* {currUser && ( */}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="age">
@@ -186,7 +169,6 @@ const CreatePlan = () => {
             style={{ width: "200px" }}
             required
           >
-            {/* <MenuItem value="">Cut/Bulk/Maintain</MenuItem> */}
             <MenuItem value={"Bulk"}>Bulk</MenuItem>
             <MenuItem value={"Cut"}>Cut</MenuItem>
             <MenuItem value={"Maintain"}>Maintain</MenuItem>
@@ -211,7 +193,6 @@ const CreatePlan = () => {
           </Button>
         </div>
       </form>
-      {/* )} */}
     </div>
   );
 };

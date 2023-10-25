@@ -16,7 +16,6 @@ const SignUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // console.log(`Name: ${name}, Value: ${value}`);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -24,7 +23,6 @@ const SignUp = () => {
   };
 
   const handleSignUp = () => {
-    // console.log(formData);
     addUser(formData);
     navigate("/login");
   };

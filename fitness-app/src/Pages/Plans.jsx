@@ -31,30 +31,36 @@ const Plans = () => {
   }, [currUser]); // Run the effect whenever currUser changes
 
   return (
-    <div className="plans">
-      <div className="plans_heading_container">
-        <h1 className="plan_heading">My Plans</h1>
+    <div className="plans-container">
+      <header className="plans-header">
+        <h1>My Plans</h1>
         <Button
-          className="create_plan_button"
+          className="plans-create-button"
           variant="contained"
           onClick={() => navigate("/createPlan")}
         >
           Create Plan
         </Button>
-      </div>
-      {data.length > 0 && (
-        <MyPlans
-          data={data}
-          selectedPlan={selectedPlan}
-          setSelectedPlan={setSelectedPlan}
-        />
-      )}
-      {data.length > 0 && (
-        <div className="View_Plan_Table">
-          <h1 style={{ textAlign: "left" }}>Workout Schedule</h1>
-          <ViewPlan data={data} selectedPlan={selectedPlan} />
-        </div>
-      )}
+      </header>
+      <section className="plans-section">
+        {data.length > 0 && (
+          <MyPlans
+            data={data}
+            selectedPlan={selectedPlan}
+            setSelectedPlan={setSelectedPlan}
+          />
+        )}
+      </section>
+      <section className="plans-section">
+        {data.length > 0 && (
+          <>
+            <h2 className="plans-subheader">Workout Schedule</h2>
+            <div className="plans-view">
+              <ViewPlan data={data} selectedPlan={selectedPlan} />
+            </div>
+          </>
+        )}
+      </section>
     </div>
   );
 };

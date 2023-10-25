@@ -19,20 +19,34 @@ const Topbar = () => {
     navigate("/login");
   };
   return (
-    <div className="top_bar">
-      <div className="left_side">
-        <img id="topbar_logo_img" src={Logo} alt="App Logo" />
-        <h3 style={{ paddingRight: "400px" }}>GymBuddy</h3>
-        <h3>Welcome {currUser ? currUser.user.firstname : ""}</h3>
+    <div className="topbar">
+      <div className="topbar-left">
+        <img className="topbar-logo" src={Logo} alt="App Logo" />
+        <h3 className="topbar-title">GymBuddy</h3>
+        <h3 className="topbar-welcome">
+          Welcome {currUser ? currUser.user.firstname : ""}
+        </h3>
       </div>
-      <div className="button_container">
-        <Button variant="outlined" onClick={() => navigate("/home")}>
+      <div className="topbar-buttons">
+        <Button
+          className="topbar-button"
+          variant="contained"
+          onClick={() => navigate("/home")}
+        >
           Home
         </Button>
-        <Button variant="outlined" onClick={() => navigate("/plans")}>
+        <Button
+          className="topbar-button"
+          variant="contained"
+          onClick={() => navigate("/plans")}
+        >
           Plans
         </Button>
-        <Button variant="outlined" onClick={handleLogout}>
+        <Button
+          className="topbar-button"
+          variant="contained"
+          onClick={handleLogout}
+        >
           Logout
         </Button>
       </div>

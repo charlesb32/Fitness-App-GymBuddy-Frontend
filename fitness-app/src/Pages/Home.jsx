@@ -29,20 +29,28 @@ const Home = () => {
     fetchData();
   }, [currUser]); // Run the effect whenever currUser changes
   return (
-    <div className="home">
-      <div className="top-row">
-        <h1 className="home_header">Today's Plan</h1>
+    <div className="home-container">
+      <h1 className="home-header">Today's Plan</h1>
+      <section className="home-section">
         {data.length > 0 && (
-          <div className="home_table">
-            <HomeMacroTable data={data} selectedPlan={selectedPlan} />
-          </div>
+          <>
+            <h2 className="home-subheader">Macros</h2>
+            <div className="home-macro-table">
+              <HomeMacroTable data={data} selectedPlan={selectedPlan} />
+            </div>
+          </>
         )}
-      </div>
-      {data.length > 0 && (
-        <div className="bottom_home_table">
-          <HomeWorkoutTable data={data} selectedPlan={selectedPlan} />
-        </div>
-      )}
+      </section>
+      <section className="home-section">
+        {data.length > 0 && (
+          <>
+            <h2 className="home-subheader">Workout</h2>
+            <div className="home-workout-table">
+              <HomeWorkoutTable data={data} selectedPlan={selectedPlan} />
+            </div>
+          </>
+        )}
+      </section>
     </div>
   );
 };

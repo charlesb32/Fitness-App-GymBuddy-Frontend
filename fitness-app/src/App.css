@@ -15,23 +15,51 @@
   margin-right: 20px;
 }
 
-.top_bar {
-  outline-style: solid;
-  outline-color: rgb(0, 0, 0);
-  border-radius: 20px;
-  padding: 20px 20px 20px 20px;
+.topbar {
   display: flex;
-  justify-content: space-between; /* This will align items to the start and end of the container */
-  align-items: center; /* This will vertically center items */
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 15px;
-  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.left_side {
-  display: flex; /* Create a flex container for GymBuddy and the logo */
-  align-items: center; /* Vertically center the logo and text */
+.topbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-logo {
+  width: 40px; /* Adjust this as per your logo's dimensions */
+  margin-right: 10px;
+}
+
+.topbar-title {
+  margin: 0;
+  margin-right: 20px;
+  font-weight: 500;
+}
+
+.topbar-welcome {
+  margin: 0;
+  font-weight: 400;
+  color: #666;
+}
+
+.topbar-buttons {
+  display: flex;
+  gap: 10px; /* space between buttons */
+}
+
+.topbar-button {
+  color: #333;
+  border-color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.topbar-button:hover {
+  background-color: #333;
+  color: #fff;
 }
 
 .create_plan {
@@ -150,4 +178,84 @@ button {
   display: block;
   margin-top: 10px; /* Add some spacing between the tables if needed */
   width: 100%;
+}
+
+.home-container {
+  max-width: 1000px; /* Or adjust based on your design */
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif; /* Or any font family you prefer */
+}
+
+.home-header {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.home-subheader {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #666;
+  text-align: left;
+}
+
+.home-section {
+  margin-bottom: 30px;
+}
+
+.home-macro-table,
+.home-workout-table {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+.plans-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif; /* or any other font family you like */
+}
+
+.plans-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.plans-header h1 {
+  margin: 0;
+  font-size: 2em;
+  color: #333;
+}
+
+.plans-create-button {
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.plans-create-button:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.plans-section {
+  margin-bottom: 30px;
+}
+
+.plans-subheader {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.plans-view {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
 }

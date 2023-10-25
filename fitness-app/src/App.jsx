@@ -10,9 +10,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { setAuthToken } from "./Axios/setAuthToken";
 import { getUser } from "./Axios/APICalls";
-import RouteGuard from "./Components/RouteGuard";
+import AuthWrapper from "./Components/AuthWrapper";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "./Redux/userActions";
+import AutoMergeLevel1 from "redux-persist/lib/stateReconciler/autoMergeLevel1";
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -40,14 +41,38 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Topbar />
+        <AuthWrapper>
+          <Topbar />
+        </AuthWrapper>
+
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/plans" element={<Plans />} />
-          <Route path="/createPlan" element={<CreatePlan />} />
+          <Route
+            path="/home"
+            element={
+              <AuthWrapper>
+                <Home />
+              </AuthWrapper>
+            }
+          />
+          <Route
+            path="/plans"
+            element={
+              <AuthWrapper>
+                <Plans />
+              </AuthWrapper>
+            }
+          />
+          <Route
+            path="/createPlan"
+            element={
+              <AuthWrapper>
+                <CreatePlan />
+              </AuthWrapper>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../Redux/userActions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-
+import { persistStore } from "redux-persist";
+import store from "../Redux/store";
 const Topbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -13,6 +14,9 @@ const Topbar = () => {
   // const setIsLoggedIn = props.setIsLoggedIn;
   const handleLogout = () => {
     localStorage.removeItem("token");
+    // localStorage.removeItem("persist:root");
+    const persistor = persistStore(store);
+    persistor.purge(); // This will purge the persisted state
     dispatch(logout()); // Dispatch the logout action to clear user-related state
     navigate("/login");
     // setIsLoggedIn(false);

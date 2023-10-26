@@ -28,9 +28,11 @@ const SignUp = () => {
   };
   return (
     <div className="login">
+      <img id="login_logo_img" src={Logo} alt="App Logo" />
+      <div className="login-logo">
+        <h2>GymBuddy</h2>
+      </div>
       <form onSubmit={handleSignUp}>
-        <img id="login_logo_img" src={Logo} alt="App Logo" />
-        <h3>GymBuddy</h3>
         <div className="form-group">
           <TextField
             className="signup_login_field"
@@ -85,13 +87,21 @@ const SignUp = () => {
             id="confirm_password"
             onChange={handleChange}
             name="confirmPassword"
-            value={formData.confirmPassowrd}
+            value={formData.confirmPassword}
             type="password"
           />
         </div>
-        <div className="form_group">
+        <div className="form-buttons">
           <Button variant="contained" color="primary" type="submit">
             Sign Up
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ marginLeft: "10px" }}
+            onClick={() => navigate("/login")}
+          >
+            Go Back
           </Button>
         </div>
       </form>

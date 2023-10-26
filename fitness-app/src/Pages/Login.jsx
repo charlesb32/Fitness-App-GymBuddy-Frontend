@@ -45,56 +45,45 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <form onSubmit={handleLogin}>
-        <img id="login_logo_img" src={Logo} alt="App Logo" />
-        <h3>GymBuddy</h3>
-        <div className="form-group">
+    <div className="login-container">
+      <div className="login-box">
+        <div className="login-logo">
+          <img src={Logo} alt="App Logo" />
+          <h2>GymBuddy</h2>
+        </div>
+        <form className="login-form" onSubmit={handleLogin}>
           <TextField
-            className="signup_login_field"
+            className="login-field"
             placeholder="email"
             required
             type="email"
-            id="email"
             onChange={handleChange}
             name="email"
             value={formData.email}
           />
-        </div>
-        <div className="form-group">
           <TextField
-            className="signup_login_field"
+            className="login-field"
             placeholder="password"
             required
-            id="password"
             onChange={handleChange}
             name="password"
             value={formData.password}
             type="password"
           />
-        </div>
-        <div className="form_group">
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ marginRight: "10px" }}
-            type="submit"
-          >
-            Login
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ marginLeft: "10px" }}
-            onClick={() => {
-              console.log("HERE");
-              navigate("/signup");
-            }}
-          >
-            Sign Up
-          </Button>
-        </div>
-      </form>
+          <div className="login-actions">
+            <Button variant="contained" color="primary" type="submit">
+              Login
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate("/signup")}
+            >
+              Sign Up
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -92,3 +92,11 @@ export const getUserInfo = async (currUserId) => {
     throw err;
   }
 };
+
+export const deletePlanById = async (planId, userId) => {
+  try {
+    await instance.delete(`/deletePlanById/${planId}/${userId}`);
+  } catch (err) {
+    throw err;
+  }
+};

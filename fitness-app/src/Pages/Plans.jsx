@@ -11,8 +11,10 @@ const Plans = () => {
   const [data, setData] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(0);
   const currUser = useSelector((state) => state.user.userInfo);
-
+  const [planChangeFlag, setPlanChangeFlag] = useState(false);
+  console.log(planChangeFlag);
   useEffect(() => {
+    console.log("fetching plans");
     const fetchData = async () => {
       if (currUser && currUser.user) {
         try {
@@ -28,7 +30,7 @@ const Plans = () => {
       }
     };
     fetchData();
-  }, [currUser]); // Run the effect whenever currUser changes
+  }, [currUser, planChangeFlag]); // Run the effect whenever currUser changes
 
   return (
     <div className="plans-container">
@@ -48,13 +50,15 @@ const Plans = () => {
             data={data}
             selectedPlan={selectedPlan}
             setSelectedPlan={setSelectedPlan}
+            planChangeFlag={planChangeFlag}
+            setPlanChangeFlag={setPlanChangeFlag}
           />
         )}
       </section>
+      <h1 className="workout-plan-header">Workout Schedule</h1>
       <section className="plans-section">
         {data.length > 0 && (
           <>
-            <h2 className="plans-subheader">Workout Schedule</h2>
             <div className="plans-view">
               <ViewPlan data={data} selectedPlan={selectedPlan} />
             </div>

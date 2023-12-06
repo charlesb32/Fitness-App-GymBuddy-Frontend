@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 //this shows their weekly workout routine based on the user's selected active plan
 const ViewPlan = ({ data, selectedPlan }) => {
   const currPlan = data[selectedPlan];
-  const workouts = currPlan.workoutId.workouts;
+  const workouts = currPlan ? currPlan.workoutId.workouts : [];
   const daysOfWeek = [
     "Sunday",
     "Monday",
@@ -28,7 +28,7 @@ const ViewPlan = ({ data, selectedPlan }) => {
           <TableRow>
             <TableCell>Plan Type</TableCell>
             {daysOfWeek.map((day, index) => (
-              <TableCell key={day} align="right">
+              <TableCell key={day} align="center">
                 {day}
               </TableCell>
             ))}
@@ -36,9 +36,9 @@ const ViewPlan = ({ data, selectedPlan }) => {
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell>{currPlan.goal}</TableCell>
+            <TableCell>{currPlan ? currPlan.goal : ""}</TableCell>
             {workouts.map((dayWorkout, index) => (
-              <TableCell key={index} align="right">
+              <TableCell key={index} align="left">
                 {dayWorkout.length > 0 ? (
                   <ul>
                     {dayWorkout.map((workout, setIndex) => (

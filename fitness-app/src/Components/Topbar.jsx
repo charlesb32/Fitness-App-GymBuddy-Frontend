@@ -10,7 +10,7 @@ import store from "../Redux/store";
 const Topbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currUser = useSelector((state) => state.user.userInfo);
+  const currUser = useSelector((state) => state.user.userInfo.user);
   const handleLogout = () => {
     localStorage.removeItem("token");
     const persistor = persistStore(store);
@@ -24,7 +24,7 @@ const Topbar = () => {
         <img className="topbar-logo" src={Logo} alt="App Logo" />
         <h3 className="topbar-title">GymBuddy</h3>
         <h3 className="topbar-welcome">
-          Welcome {currUser ? currUser.user.firstname : ""}
+          Welcome {currUser ? currUser.firstname : ""}
         </h3>
       </div>
       <div className="topbar-buttons">

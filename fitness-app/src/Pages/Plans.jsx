@@ -12,9 +12,9 @@ const Plans = () => {
   const [selectedPlan, setSelectedPlan] = useState(0);
   const currUser = useSelector((state) => state.user.userInfo);
   const [planChangeFlag, setPlanChangeFlag] = useState(false);
-  console.log(planChangeFlag);
+  // console.log(planChangeFlag);
   useEffect(() => {
-    console.log("fetching plans");
+    // console.log("fetching plans");
     const fetchData = async () => {
       if (currUser && currUser.user) {
         try {
@@ -34,37 +34,47 @@ const Plans = () => {
 
   return (
     <div className="plans-container">
-      <header className="plans-header">
-        <h1>My Plans</h1>
-        <Button
+      {data.length === 0 && (
+        <p>
+          You have not made any plans, click create new plan in the topbar to
+          get started!
+        </p>
+      )}
+      {data.length > 0 && (
+        <>
+          <header className="plans-header">
+            <h1>My Plans</h1>
+            {/* <Button
           className="plans-create-button"
           variant="contained"
           onClick={() => navigate("/createPlan")}
         >
           Create Plan
-        </Button>
-      </header>
-      <section className="plans-section">
-        {data.length > 0 && (
-          <MyPlans
-            data={data}
-            selectedPlan={selectedPlan}
-            setSelectedPlan={setSelectedPlan}
-            planChangeFlag={planChangeFlag}
-            setPlanChangeFlag={setPlanChangeFlag}
-          />
-        )}
-      </section>
-      <h1 className="workout-plan-header">Workout Schedule</h1>
-      <section className="plans-section">
-        {data.length > 0 && (
-          <>
-            <div className="plans-view">
-              <ViewPlan data={data} selectedPlan={selectedPlan} />
-            </div>
-          </>
-        )}
-      </section>
+        </Button> */}
+          </header>
+          <section className="plans-section">
+            {data.length > 0 && (
+              <MyPlans
+                data={data}
+                selectedPlan={selectedPlan}
+                setSelectedPlan={setSelectedPlan}
+                planChangeFlag={planChangeFlag}
+                setPlanChangeFlag={setPlanChangeFlag}
+              />
+            )}
+          </section>
+          <h1 className="workout-plan-header">Workout Schedule</h1>
+          <section className="plans-section">
+            {data.length > 0 && (
+              <>
+                <div className="plans-view">
+                  <ViewPlan data={data} selectedPlan={selectedPlan} />
+                </div>
+              </>
+            )}
+          </section>
+        </>
+      )}
     </div>
   );
 };

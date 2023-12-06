@@ -29,6 +29,13 @@ const Topbar = () => {
       </div>
       <div className="topbar-buttons">
         <Button
+          className="plans-create-button"
+          variant="contained"
+          onClick={() => navigate("/createPlan")}
+        >
+          Create New Plan
+        </Button>
+        <Button
           className="topbar-button"
           variant="contained"
           onClick={() => navigate("/home")}

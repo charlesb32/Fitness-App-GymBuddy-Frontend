@@ -7,7 +7,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, Checkbox, IconButton, Menu, MenuItem } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  IconButton,
+  Menu,
+  MenuItem,
+  Modal,
+} from "@mui/material";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import { deletePlanById, setActivePlanIndex } from "../Axios/APICalls";
 import { useSelector } from "react-redux";
@@ -37,6 +45,7 @@ const MyPlans = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [planToDelete, setPlanToDelete] = useState(null);
   const [rowSelected, setRowSelected] = useState(0);
+  const [openMorePlanInfoModal, setOpenMorePlanInfoModal] = useState(false);
   const handleActivePlanChange = async (planIndex) => {
     console.log(typeof planIndex);
     setSelectedPlan(planIndex);
@@ -55,6 +64,10 @@ const MyPlans = ({
     // setSelectedRestaurant(null);
   };
   // console.log(selectedPlan);
+
+  const showMorePlanInfoModal = () => {
+    setOpenMorePlanInfoModal(true);
+  };
   return (
     <>
       <TableContainer component={Paper}>
@@ -119,16 +132,19 @@ const MyPlans = ({
             let flag = 0;
             console.log(selectedPlan, rowSelected);
             if (selectedPlan === rowSelected) {
+              setPlanChangeFlag((prevFlag) => prevFlag + 1);
               flag += 1;
               if (rows.length === 1) {
                 //remove activePlanId
               } else {
                 handleActivePlanChange(0);
+                setPlanChangeFlag((prevFlag) => prevFlag + 1);
               }
             }
             deletePlanById(planToDelete.planId, currUser.user.id).then(() => {
               // setPlanChangeFlag((prevFlag) => !prevFlag);
               console.log(planToDelete.planId);
+              setPlanChangeFlag((prevFlag) => prevFlag + 1);
               // handleMenuClose();
             });
             if (flag === 0 && rowSelected < selectedPlan) {
@@ -141,7 +157,30 @@ const MyPlans = ({
         >
           Delete Plan
         </MenuItem>
+        <MenuItem onClick={showMorePlanInfoModal}>View More Plan Info</MenuItem>
       </Menu>
+      <Modal
+        open={openMorePlanInfoModal}
+        onClose={() => setOpenMorePlanInfoModal(false)}
+      >
+        <Box className="View-More-Plan-Info-Box">
+          {dataArr[rowSelected] && (
+            <>
+              <div>Age: {dataArr[rowSelected].age}</div>
+              <div>Gender: {dataArr[rowSelected].gender}</div>
+              <div>
+                Height: {dataArr[rowSelected].heightFeet} ft
+                {" " + dataArr[rowSelected].heightInches} in
+              </div>
+              <div>Weight: {dataArr[rowSelected].weight} lbs</div>
+              <div>
+                Frequency: {dataArr[rowSelected].frequency} times a week
+              </div>
+              <div>Goal: {dataArr[rowSelected].goal}</div>
+            </>
+          )}
+        </Box>
+      </Modal>
     </>
   );
 };

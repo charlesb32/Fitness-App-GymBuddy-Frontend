@@ -12,7 +12,7 @@ const Plans = () => {
   const [selectedPlan, setSelectedPlan] = useState(0);
   const currUser = useSelector((state) => state.user.userInfo);
   const [planChangeFlag, setPlanChangeFlag] = useState(0);
-  // console.log(planChangeFlag);
+  console.log(data);
   useEffect(() => {
     // console.log("fetching plans");
     const fetchData = async () => {

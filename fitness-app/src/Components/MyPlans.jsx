@@ -20,7 +20,7 @@ const MyPlans = ({
   planChangeFlag,
   setPlanChangeFlag,
 }) => {
-  // console.log(selectedPlan, data);
+  console.log(selectedPlan, data);
   const dataArr = data;
   const currUser = useSelector((state) => state.user.userInfo);
   // console.log(dataArr);
@@ -37,10 +37,10 @@ const MyPlans = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [planToDelete, setPlanToDelete] = useState(null);
   const [rowSelected, setRowSelected] = useState(0);
-  const handleActivePlanChange = (planIndex) => {
+  const handleActivePlanChange = async (planIndex) => {
     console.log(typeof planIndex);
     setSelectedPlan(planIndex);
-    setActivePlanIndex(currUser.user.id, planIndex);
+    await setActivePlanIndex(currUser.user.id, planIndex);
   };
 
   const handleMenuOpen = (event, plan, index) => {
@@ -116,8 +116,10 @@ const MyPlans = ({
         <MenuItem
           onClick={async () => {
             // await deletePlanById(planToDelete.planId);
+            let flag = 0;
             console.log(selectedPlan, rowSelected);
             if (selectedPlan === rowSelected) {
+              flag += 1;
               if (rows.length === 1) {
                 //remove activePlanId
               } else {
@@ -129,7 +131,10 @@ const MyPlans = ({
               console.log(planToDelete.planId);
               // handleMenuClose();
             });
-            setPlanChangeFlag((prevFlag) => !prevFlag);
+            if (flag === 0 && rowSelected < selectedPlan) {
+              handleActivePlanChange(selectedPlan - 1);
+            }
+            setPlanChangeFlag((prevFlag) => prevFlag + 1);
             handleMenuClose();
             // setActivePlanIndex(currUser.user.id, 0);
           }}

@@ -1,3 +1,4 @@
+//SignUp Page
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import Logo from "../Assets/Logo.jpg";

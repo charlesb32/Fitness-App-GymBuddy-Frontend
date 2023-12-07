@@ -1,9 +1,8 @@
+//displays daily calories, carbs, fats, and protein intake in a table on home screen
 import { Table, TableBody, TableRow, TableCell } from "@mui/material";
 
-//displays daily calories, carbs, fats, and protein intake
 const HomeMacroTable = ({ data, selectedPlan }) => {
   const currPlan = data[selectedPlan];
-  console.log(currPlan);
   const macroBreakDown = {
     Calories: `${currPlan.dailyCalories} cal`,
     Carbs: `${currPlan.dailyCarbs} g`,

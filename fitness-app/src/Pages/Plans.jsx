@@ -1,36 +1,34 @@
-import { Button } from "@mui/material";
+//this is the plans page that holds all components rendered on the plans tab
+
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { getPlans, getUserInfo } from "../Axios/APICalls";
 import MyPlans from "../Components/MyPlans";
 import ViewPlan from "../Components/ViewPlan";
 import { useSelector } from "react-redux";
 
 const Plans = () => {
-  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(0);
   const currUser = useSelector((state) => state.user.userInfo);
   const [planChangeFlag, setPlanChangeFlag] = useState(0);
-  console.log(data);
+
   useEffect(() => {
-    // console.log("fetching plans");
     const fetchData = async () => {
       if (currUser && currUser.user) {
         try {
           const plans = await getPlans(currUser.user.id);
+          const userInfo = await getUserInfo(currUser.user.id);
+          const activePlanIndex = userInfo.data.activePlanIndex;
           setData(plans.data);
-          const activePlanIndex = (await getUserInfo(currUser.user.id)).data
-            .activePlanIndex;
-
           setSelectedPlan(activePlanIndex);
         } catch (error) {
           console.error("Error fetching plans:", error);
         }
       }
     };
+
     fetchData();
-  }, [currUser, planChangeFlag]); // Run the effect whenever currUser changes
+  }, [currUser, planChangeFlag]);
 
   return (
     <div className="plans-container">
@@ -44,13 +42,6 @@ const Plans = () => {
         <>
           <header className="plans-header">
             <h1>My Plans</h1>
-            {/* <Button
-          className="plans-create-button"
-          variant="contained"
-          onClick={() => navigate("/createPlan")}
-        >
-          Create Plan
-        </Button> */}
           </header>
           <section className="plans-section">
             {data.length > 0 && (

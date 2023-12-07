@@ -1,10 +1,10 @@
+//Create plan form for when a user wants to create a new plan
 import React, { useState } from "react";
 import { TextField, Button, Select, MenuItem, Typography } from "@mui/material";
 import { addPlanToUser } from "../Axios/APICalls";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-//Create plan form for when a user wants to create a new plan
 const CreatePlan = () => {
   const navigate = useNavigate();
   const currUser = useSelector((state) => state.user.userInfo);
@@ -20,7 +20,6 @@ const CreatePlan = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(`Name: ${name}, Value: ${value}`);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,

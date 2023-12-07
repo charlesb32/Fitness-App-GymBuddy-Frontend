@@ -1,3 +1,4 @@
+//this shows their weekly workout routine based on the user's selected active plan on the plans page
 import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,7 +8,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-//this shows their weekly workout routine based on the user's selected active plan
 const ViewPlan = ({ data, selectedPlan }) => {
   const currPlan = data[selectedPlan];
   const workouts = currPlan ? currPlan.workoutId.workouts : [];

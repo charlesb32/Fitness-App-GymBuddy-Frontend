@@ -1,3 +1,4 @@
+//Login Page
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import Logo from "../Assets/Logo.jpg";
@@ -28,12 +29,11 @@ const Login = () => {
     e.preventDefault(); // Prevent the default form submission behavior
 
     try {
-      const loginResponse = await login(formData); // Await the login response
-
+      const loginResponse = await login(formData);
       if (loginResponse && localStorage.getItem("token")) {
         const token = localStorage.getItem("token");
         setAuthToken(token);
-        const userResponse = await getUser(token); // Await the user response
+        const userResponse = await getUser(token);
         dispatch(setUserInfo(userResponse.data));
         navigate("/home"); // Navigate to /home if login is successful
       } else {

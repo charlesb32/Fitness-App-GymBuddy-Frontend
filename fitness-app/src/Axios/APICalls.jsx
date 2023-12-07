@@ -1,6 +1,6 @@
+//contains all axios API calls used throughout the app
 import axios from "axios";
 import { setAuthToken } from "./setAuthToken";
-
 const baseURL = "http://localhost:4000/";
 const instance = axios.create({ baseURL });
 
@@ -13,7 +13,6 @@ export const addPlanToUser = async (userData, currUserId) => {
     });
     return response.data;
   } catch (error) {
-    console.log("ERROR");
     throw error;
   }
 };
@@ -22,7 +21,6 @@ export const addPlanToUser = async (userData, currUserId) => {
 export const addUser = async (userData) => {
   try {
     const response = await instance.post("/addUser", { userData });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     alert(error.response.data.message);
@@ -34,14 +32,12 @@ export const addUser = async (userData) => {
 export const login = async (loginPayload) => {
   try {
     const response = await instance.post("/login", loginPayload);
-    console.log(response.data);
     const { token } = response.data;
     localStorage.setItem("token", token);
     //set token to axios common header
     setAuthToken(token);
     return response.data;
   } catch (error) {
-    console.log(error);
     alert(error.response.data.message);
     return error;
   }
@@ -93,9 +89,11 @@ export const getUserInfo = async (currUserId) => {
   }
 };
 
+//deletes a plan for a user by planID and userID
 export const deletePlanById = async (planId, userId) => {
   try {
-    await instance.delete(`/deletePlanById/${planId}/${userId}`);
+    const res = await instance.delete(`/deletePlanById/${planId}/${userId}`);
+    return res;
   } catch (err) {
     throw err;
   }

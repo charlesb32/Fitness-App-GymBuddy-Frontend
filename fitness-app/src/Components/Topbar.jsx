@@ -1,3 +1,4 @@
+//This is the topbar of the app
 import { Button } from "@mui/material";
 import * as React from "react";
 import Logo from "../Assets/Logo.jpg";

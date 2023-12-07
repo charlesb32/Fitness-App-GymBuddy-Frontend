@@ -1,3 +1,4 @@
+//sets header for auth token
 import axios from "axios";
 
 export const setAuthToken = (token) => {

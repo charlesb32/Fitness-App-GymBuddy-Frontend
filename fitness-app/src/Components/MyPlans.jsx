@@ -1,3 +1,5 @@
+//displays all of users plans and allows them to view additional details about a plan, delete a plan, and select an active plan
+
 import * as React from "react";
 import { useState } from "react";
 import Table from "@mui/material/Table";
@@ -9,7 +11,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import {
   Box,
-  Button,
   Checkbox,
   IconButton,
   Menu,
@@ -20,7 +21,6 @@ import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import { deletePlanById, setActivePlanIndex } from "../Axios/APICalls";
 import { useSelector } from "react-redux";
 
-//shows all plans that a user account has, with daily calorires, carb, fat, and protein intake, as well as their plan type. From here, the user can also select which plan they want to be their active plan
 const MyPlans = ({
   data,
   selectedPlan,
@@ -28,11 +28,8 @@ const MyPlans = ({
   planChangeFlag,
   setPlanChangeFlag,
 }) => {
-  console.log(selectedPlan, data);
-  const dataArr = data;
   const currUser = useSelector((state) => state.user.userInfo);
-  // console.log(dataArr);
-  const rows = dataArr.map((plan) => ({
+  const rows = data.map((plan) => ({
     plans: plan.goal,
     dailyCalories: plan.dailyCalories,
     dailyCarbs: plan.dailyCarbs,
@@ -47,7 +44,6 @@ const MyPlans = ({
   const [rowSelected, setRowSelected] = useState(0);
   const [openMorePlanInfoModal, setOpenMorePlanInfoModal] = useState(false);
   const handleActivePlanChange = async (planIndex) => {
-    console.log(typeof planIndex);
     setSelectedPlan(planIndex);
     await setActivePlanIndex(currUser.user.id, planIndex);
   };
@@ -61,13 +57,12 @@ const MyPlans = ({
   const handleMenuClose = () => {
     setAnchorEl(null);
     setPlanToDelete(null);
-    // setSelectedRestaurant(null);
   };
-  // console.log(selectedPlan);
 
   const showMorePlanInfoModal = () => {
     setOpenMorePlanInfoModal(true);
   };
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -128,31 +123,27 @@ const MyPlans = ({
       >
         <MenuItem
           onClick={async () => {
-            // await deletePlanById(planToDelete.planId);
-            let flag = 0;
-            console.log(selectedPlan, rowSelected);
+            let flag = 0; //determines what new seleceted plan is on a delete
             if (selectedPlan === rowSelected) {
-              setPlanChangeFlag((prevFlag) => prevFlag + 1);
               flag += 1;
               if (rows.length === 1) {
                 //remove activePlanId
               } else {
                 handleActivePlanChange(0);
-                setPlanChangeFlag((prevFlag) => prevFlag + 1);
               }
             }
-            deletePlanById(planToDelete.planId, currUser.user.id).then(() => {
-              // setPlanChangeFlag((prevFlag) => !prevFlag);
-              console.log(planToDelete.planId);
-              setPlanChangeFlag((prevFlag) => prevFlag + 1);
-              // handleMenuClose();
-            });
+            const res = await deletePlanById(
+              planToDelete.planId,
+              currUser.user.id
+            );
+            if (res) {
+              planChangeFlag++;
+              setPlanChangeFlag(planChangeFlag);
+            }
             if (flag === 0 && rowSelected < selectedPlan) {
               handleActivePlanChange(selectedPlan - 1);
             }
-            setPlanChangeFlag((prevFlag) => prevFlag + 1);
             handleMenuClose();
-            // setActivePlanIndex(currUser.user.id, 0);
           }}
         >
           Delete Plan
@@ -164,19 +155,17 @@ const MyPlans = ({
         onClose={() => setOpenMorePlanInfoModal(false)}
       >
         <Box className="View-More-Plan-Info-Box">
-          {dataArr[rowSelected] && (
+          {data[rowSelected] && (
             <>
-              <div>Age: {dataArr[rowSelected].age}</div>
-              <div>Gender: {dataArr[rowSelected].gender}</div>
+              <div>Age: {data[rowSelected].age}</div>
+              <div>Gender: {data[rowSelected].gender}</div>
               <div>
-                Height: {dataArr[rowSelected].heightFeet} ft
-                {" " + dataArr[rowSelected].heightInches} in
+                Height: {data[rowSelected].heightFeet} ft
+                {" " + data[rowSelected].heightInches} in
               </div>
-              <div>Weight: {dataArr[rowSelected].weight} lbs</div>
-              <div>
-                Frequency: {dataArr[rowSelected].frequency} times a week
-              </div>
-              <div>Goal: {dataArr[rowSelected].goal}</div>
+              <div>Weight: {data[rowSelected].weight} lbs</div>
+              <div>Frequency: {data[rowSelected].frequency} times a week</div>
+              <div>Goal: {data[rowSelected].goal}</div>
             </>
           )}
         </Box>

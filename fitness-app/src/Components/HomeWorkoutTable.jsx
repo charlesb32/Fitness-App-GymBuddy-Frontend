@@ -1,3 +1,4 @@
+//displays exercises for the current day in the user's workout program on home page in a table
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,7 +7,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-//displays exercises for the current day in the user's workout program
 const HomeWorkoutTable = ({ data, selectedPlan }) => {
   const today = new Date();
   const dayOfWeek = today.getDay(); // Returns 0 for Sunday, 1 for Monday, 2 for Tuesday, etc.

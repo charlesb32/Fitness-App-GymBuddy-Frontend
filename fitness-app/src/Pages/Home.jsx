@@ -4,10 +4,12 @@ import { getUserInfo, getPlans } from "../Axios/APICalls";
 import { useSelector } from "react-redux";
 import HomeMacroTable from "../Components/HomeMacroTable";
 import HomeWorkoutTable from "../Components/HomeWorkoutTable";
+import Loading from "../Components/Loading";
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const currUser = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
@@ -22,12 +24,19 @@ const Home = () => {
           setSelectedPlan(activePlanIndex);
         } catch (error) {
           console.error("Error fetching plans:", error);
+        } finally {
+          setIsLoading(false);
         }
       }
     };
-
+    setIsLoading(true);
     fetchData();
   }, [currUser]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div className="home-container">
       {data.length === 0 && (

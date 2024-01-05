@@ -5,12 +5,14 @@ import { getPlans, getUserInfo } from "../Axios/APICalls";
 import MyPlans from "../Components/MyPlans";
 import ViewPlan from "../Components/ViewPlan";
 import { useSelector } from "react-redux";
+import Loading from "../Components/Loading";
 
 const Plans = () => {
   const [data, setData] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(0);
   const currUser = useSelector((state) => state.user.userInfo);
   const [planChangeFlag, setPlanChangeFlag] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,13 +25,18 @@ const Plans = () => {
           setSelectedPlan(activePlanIndex);
         } catch (error) {
           console.error("Error fetching plans:", error);
+        } finally {
+          setIsLoading(false);
         }
       }
     };
-
+    setIsLoading(true);
     fetchData();
   }, [currUser, planChangeFlag]);
 
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="plans-container">
       {data.length === 0 && (
